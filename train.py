@@ -44,3 +44,30 @@ X_train, X_test, y_train, y_test = model_selection.train_test_split(
 print("Geral: ", df[target], mean())
 print("Treino: ", y_train.mean())
 print("Teste: ", y_test.mean())
+
+# COMMAND ----------
+
+with mlflow.start_run():
+    
+    mlflow.sklearn.autolog()
+    
+    model = tree.DecisionTreeClassifier(min_samples_leaf=50)
+
+    model.fit(X_train, y_train)
+
+
+    y_train_prod = model.predict(X_train)
+    acc_train = metrics.accuracy_score(y_train, y_train_prod)
+    print("Acuracia: ", acc_train)
+
+    y_test_prod = model.predict(X_test)
+    acc_test = metrics.accuracy_score(y_test, y_test_prod)
+    print("Acuracia: ", acc_test)
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
