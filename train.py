@@ -51,7 +51,10 @@ with mlflow.start_run():
     
     mlflow.sklearn.autolog()
     
-    model = tree.DecisionTreeClassifier(min_samples_leaf=50)
+    #model = tree.DecisionTreeClassifier(min_samples_leaf=50)
+    model = ensemble.RandomForestClassifier(n_estimators=5, 
+                                            criterion="entropy",
+                                            min_samples_leaf=15)
 
     model.fit(X_train, y_train)
 
